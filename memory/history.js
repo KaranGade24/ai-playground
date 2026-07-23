@@ -18,7 +18,7 @@ export const AiHistory = (text) => {
   }
 };
 
-const removeOldHistory = () => {
+export const removeOldHistory = () => {
   if (history.length > 10) {
     // remove user histrory
     // shift function removes the first element
@@ -28,5 +28,3 @@ const removeOldHistory = () => {
     history.shift();
   }
 };
-
-removeOldHistory();

@@ -1,8 +1,14 @@
 import { AI } from "./config/geminiConfig.js";
-import { AiHistory, history, userHistory } from "./DB/AiHistory.js";
+import {
+  AiHistory,
+  history,
+  removeOldHistory,
+  userHistory,
+} from "./memory/history.js";
 
 export const chat = async (prompt) => {
   try {
+    removeOldHistory();
     // passing prompt to history Storage
     userHistory(prompt);
 
