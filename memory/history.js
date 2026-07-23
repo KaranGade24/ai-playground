@@ -1,19 +1,19 @@
 export const history = [];
 
-export const userHistory = (text) => {
+export const addUserMessage = (prompt) => {
   if (text !== "") {
     history.push({
       role: "user",
-      parts: [{ text }],
+      parts: [{ text: prompt }],
     });
   }
 };
 
-export const AiHistory = (text) => {
+export const addModelMessage = (response) => {
   if (text !== "") {
     history.push({
       role: "model",
-      parts: [{ text }],
+      parts: [{ text: response }],
     });
   }
 };

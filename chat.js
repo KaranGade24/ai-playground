@@ -1,16 +1,16 @@
 import { AI } from "./config/geminiConfig.js";
 import {
-  AiHistory,
+  addModelMessage,
+  addUserMessage,
   history,
   removeOldHistory,
-  userHistory,
 } from "./memory/history.js";
 
 export const chat = async (prompt) => {
   try {
     removeOldHistory();
     // passing prompt to history Storage
-    userHistory(prompt);
+    addUserMessage(prompt);
 
     // generating response from AI model
     const response = await AI.models.generateContent({
@@ -20,7 +20,7 @@ export const chat = async (prompt) => {
 
     if (response.text) {
       // passing response text to history Storage
-      AiHistory(response.text.trim());
+      addModelMessage(response.text.trim());
       return response.text.trim();
     } else {
       console.log("Response not found", response);
