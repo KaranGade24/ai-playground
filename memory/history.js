@@ -14,21 +14,29 @@ export const addUserMessage = (prompt) => {
 };
 
 export const addModelMessage = (response) => {
-  if (response !== "") {
-    history.push({
-      role: "model",
-      parts: [{ text: response }],
-    });
+  try {
+    if (response !== "") {
+      history.push({
+        role: "model",
+        parts: [{ text: response }],
+      });
+    }
+  } catch (error) {
+    console.log("Error in adding model message in history", error);
   }
 };
 
 export const removeOldHistory = () => {
-  if (history.length > 10) {
-    // remove user histrory
-    // shift function removes the first element
-    history.shift();
+  try {
+    if (history.length > 10) {
+      // remove user histrory
+      // shift function removes the first element
+      history.shift();
 
-    // remove AI response history
-    history.shift();
+      // remove AI response history
+      history.shift();
+    }
+  } catch (error) {
+    console.log("Error in removing history", error);
   }
 };

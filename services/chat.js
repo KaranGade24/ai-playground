@@ -22,6 +22,6 @@ export const startChat = async (rl) => {
     // rl.close();
     return;
   } catch (error) {
-    console.log(error);
+    console.log("Error in generating chat response", error);
   }
 };
