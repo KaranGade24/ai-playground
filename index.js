@@ -1,30 +1,28 @@
-import { chat } from "./chat.js";
 import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
+import { emailWriter } from "./services/email.js";
+import { startChat } from "./services/chat.js";
 
-const startChat = async () => {
-  try {
-    // initilization of readline interface
-    const rl = new readline.Interface({ input, output });
-    console.log(`--------------------------------
-    🤖 AI Playground
---------------------------------`);
-    while (true) {
-      const prompt = await rl.question("You: ");
-      if (prompt.trim() === "0") {
-        break;
-      }
-      if (prompt.trim() === "") {
-        continue;
-      }
-      const response = await chat(prompt.trim());
-      console.log("AI: ", response);
-      console.log("__________________________________\n\n");
+const main = async () => {
+  const rl = new readline.Interface({ input, output });
+  let op = "";
+
+  while (true) {
+    console.log("0: Exit \n1: To chat\n2: For email writing\n");
+    op = await rl.question("Enter option: ");
+
+    if (op.trim() === "0") {
+      rl.close();
+      break;
+    } else if (op.trim() === "1") {
+      await startChat(rl);
+    } else if (op.trim() === "2") {
+      await emailWriter(rl);
+    } else {
+      console.log("You enter wrong option\n");
     }
-    rl.close();
-  } catch (error) {
-    console.log(error);
+    console.log({ op });
   }
 };
 
-startChat();
+main();

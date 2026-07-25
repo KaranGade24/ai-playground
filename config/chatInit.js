@@ -1,10 +1,10 @@
-import { AI } from "./config/geminiConfig.js";
+import { AI } from "./geminiConfig.js";
 import {
   addModelMessage,
   addUserMessage,
   history,
   removeOldHistory,
-} from "./memory/history.js";
+} from "../memory/history.js";
 
 export const chat = async (prompt) => {
   try {
@@ -14,8 +14,13 @@ export const chat = async (prompt) => {
 
     // generating response from AI model
     const response = await AI.models.generateContent({
-      model: "gemini-2.5-flash-lite",
+      model: "gemini-3.5-flash-lite",
       contents: history,
+      config: {
+        temperature: 0.0,
+        topP: 0,
+        // maxOutputTokens:,
+      },
     });
 
     if (response.text) {

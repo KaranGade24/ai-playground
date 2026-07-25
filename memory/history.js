@@ -1,16 +1,20 @@
 export const history = [];
 
 export const addUserMessage = (prompt) => {
-  if (text !== "") {
-    history.push({
-      role: "user",
-      parts: [{ text: prompt }],
-    });
+  try {
+    if (prompt !== "") {
+      history.push({
+        role: "user",
+        parts: [{ text: prompt }],
+      });
+    }
+  } catch (error) {
+    console.log("Error in adding user message in history", error);
   }
 };
 
 export const addModelMessage = (response) => {
-  if (text !== "") {
+  if (response !== "") {
     history.push({
       role: "model",
       parts: [{ text: response }],
