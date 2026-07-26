@@ -2,17 +2,33 @@ import { emptyValidatorCLI_input } from "./validations.js";
 import { rl } from "../providers/readline.js";
 
 export const CLI_input = async (question = "", validation = null) => {
-  let value;
   while (true) {
-    value = await rl.question(`${question}`);
-    let result = emptyValidatorCLI_input(value);
-    if (!result.sucess) {
+    const value = (await rl.question(question)).trim();
+
+    // Required field validation
+    const requiredResult = emptyValidatorCLI_input(value);
+
+    if (!requiredResult.success) {
       continue;
-    } else if (validation !== null && !validation(value)?.sucess) {
-      continue;
-    } else {
-      break;
     }
+
+    // Custom validation (optional)
+    if (validation) {
+      const validationResult = validation(value);
+
+      if (!validationResult.success) {
+        continue;
+      }
+
+      return {
+        value,
+        validatedValue: validationResult.validatedValue,
+      };
+    }
+
+    return {
+      value,
+      validatedValue: null,
+    };
   }
-  return value;
 };

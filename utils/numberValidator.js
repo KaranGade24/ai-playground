@@ -3,8 +3,8 @@ export const numberValidator = (value) => {
 
   if (Number.isNaN(num)) {
     console.log("Please enter a valid number.");
-    return { sucess: false };
+    return { success: false };
   }
 
-  return { value, sucess: true };
+  return { validatedValue: num, success: true };
 };

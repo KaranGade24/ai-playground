@@ -1,17 +1,17 @@
 export const emptyValidatorCLI_input = (input) => {
   if (input.trim() === "") {
     console.log("Please enter input.");
-    return { sucess: false };
+    return { success: false };
   }
-  return { sucess: true };
+  return { success: true };
 };
 
 export const emailValidation = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (emailRegex.test(email)) {
-    return { sucess: true };
+    return { success: true };
   } else {
     console.log("Enter the valid email.");
-    return { sucess: false };
+    return { success: false };
   }
 };
