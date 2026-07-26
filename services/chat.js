@@ -1,6 +1,6 @@
 import readline from "node:readline";
 import { stdin as input, stdout as output } from "node:process";
-import { chat } from "../config/chatInit.js";
+import { chat } from "../providers/gemini.js";
 
 export const startChat = async (rl) => {
   try {

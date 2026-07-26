@@ -1,4 +1,4 @@
-import { AI } from "./geminiConfig.js";
+import { AI } from "../config/geminiConfig.js";
 import {
   addModelMessage,
   addUserMessage,
