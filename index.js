@@ -46,13 +46,13 @@ const main = async () => {
   }
 };
 
-for await (const text of readTextFile(filePath)) {
-  console.log(text);
-}
-
-// for await (const text of readPDFfile(pdfFilePath, 1000)) {
+// for await (const text of readTextFile(filePath, 1000)) {
 //   console.log(text);
 // }
+
+for await (const text of readPDFfile(pdfFilePath, 1000)) {
+  console.log(text);
+}
 
 rl.close();
 

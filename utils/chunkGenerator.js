@@ -1,17 +1,20 @@
 import { encode, decode } from "gpt-tokenizer";
+import { PdfReader } from "pdfreader";
+
 export async function* chunkGenerator(stream, TOKEN_SIZE = 1000) {
   try {
-    let bufferToken = [];
+    let tokenBuffer = [];
     for await (const piece of stream) {
-      bufferToken.push(...encode(piece));
+      tokenBuffer.push(...encode(piece));
 
-      while (bufferToken.length >= TOKEN_SIZE) {
-        const chunks = bufferToken.splice(0, TOKEN_SIZE);
+      while (tokenBuffer.length >= TOKEN_SIZE) {
+        const chunks = tokenBuffer.slice(0, TOKEN_SIZE);
+        tokenBuffer.splice(0, TOKEN_SIZE - 50);
         yield decode(chunks);
       }
     }
-    if (bufferToken.length > 0) {
-      yield decode(bufferToken);
+    if (tokenBuffer.length > 0) {
+      yield decode(tokenBuffer);
     }
   } catch (error) {
     console.error("Error in generating tokens.", error);
