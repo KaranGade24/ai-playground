@@ -1,14 +1,16 @@
 import { actions } from "./providers/actions.js";
 import { rl } from "./providers/readline.js";
-import { readFileChunks } from "./services/readPdfFile.js";
 import { CLI_input } from "./utils/CLI_input.js";
 import { numberValidator } from "./utils/numberValidator.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import { readTextFile } from "./reader/text.js";
+import { readPDFfile } from "./reader/pdf.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const filePath = path.join(__dirname, "demo.txt");
+const pdfFilePath = path.join(__dirname, "Karan_Gade_Resume_8446726903.pdf");
 
 const main = async () => {
   try {
@@ -44,21 +46,14 @@ const main = async () => {
   }
 };
 
-// const generator = readFileChunk(filePath);
-// while (true) {
-//   const result = await generator.next();
+for await (const text of readTextFile(filePath)) {
+  console.log(text);
+}
 
-//   if (result.done) {
-//     break;
-//   }
-
-//   const chunk = result.value;
-//   console.log(chunk);
+// for await (const text of readPDFfile(pdfFilePath, 1000)) {
+//   console.log(text);
 // }
 
-for await (const chunk of readFileChunks(filePath)) {
-  console.log(chunk);
-}
 rl.close();
 
 // main();

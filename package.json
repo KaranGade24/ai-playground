@@ -12,6 +12,9 @@
   "description": "",
   "dependencies": {
     "@google/genai": "^2.13.0",
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "gpt-tokenizer": "^3.4.0",
+    "pdf-parse": "^2.4.5",
+    "pdfreader": "^3.0.8"
   }
 }
