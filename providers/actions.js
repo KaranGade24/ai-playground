@@ -1,3 +1,4 @@
+import { generateEmbeddings } from "../embeddings/embedding.js";
 import { startChat } from "../services/chat.js";
 import { emailWriter } from "../services/email.js";
 

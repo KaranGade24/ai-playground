@@ -1,6 +1,6 @@
 import { decode, encode } from "gpt-tokenizer";
 import { PdfReader } from "pdfreader";
-import { chunkGenerator } from "../utils/chunkGenerator.js";
+import { chunkGenerator } from "../chunking/chunkGenerator.js";
 import { readPDFtext } from "../utils/readPdfText.js";
 
 export async function* readPDFfile(filePath = "", TOKEN_SIZE = 1000) {

@@ -4,8 +4,9 @@ import { CLI_input } from "./utils/CLI_input.js";
 import { numberValidator } from "./utils/numberValidator.js";
 import path from "path";
 import { fileURLToPath } from "url";
-import { readTextFile } from "./reader/text.js";
-import { readPDFfile } from "./reader/pdf.js";
+import { readTextFile } from "./reader/textReader.js";
+import { readPDFfile } from "./reader/pdfReader.js";
+import { generateEmbeddings } from "./embeddings/embedding.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -50,10 +51,11 @@ const main = async () => {
 //   console.log(text);
 // }
 
-for await (const text of readPDFfile(pdfFilePath, 1000)) {
-  console.log(text);
-}
+// for await (const text of readPDFfile(pdfFilePath, 1000)) {
+//   console.log(text);
+// }
 
-rl.close();
+// rl.close();
 
+await generateEmbeddings(filePath, 1000, "text");
 // main();

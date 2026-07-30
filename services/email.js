@@ -1,8 +1,8 @@
 import { createEmailPromptTemplate } from "../temlates/email-template.js";
-import { chat } from "../providers/gemini.js";
 import { emailValidation } from "../utils/validations.js";
 import { CLI_input } from "../utils/CLI_input.js";
 import { rl } from "../providers/readline.js";
+import { normalChat } from "../chats/normalChat.js";
 
 export const emailWriter = async () => {
   try {
@@ -19,7 +19,7 @@ export const emailWriter = async () => {
       purpose,
     });
 
-    const response = await chat(prompt);
+    const response = await normalChat(prompt, "gemini-3.5-flash-lite");
     console.log(response);
 
     return;
