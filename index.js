@@ -6,7 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { readTextFile } from "./reader/textReader.js";
 import { readPDFfile } from "./reader/pdfReader.js";
-import { generateEmbeddings } from "./embeddings/embedding.js";
+import { generateEmbedding } from "./embeddings/embedding.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,8 +20,10 @@ const main = async () => {
     while (true) {
       console.log(`
 0: Exit
-1: To chat
+1: To normal chat
 2: For email writing
+3: for generating embedding
+4: Embeded chat
 `);
       const { value, validatedValue } = await CLI_input(
         "Enter option: ",
@@ -47,15 +49,4 @@ const main = async () => {
   }
 };
 
-// for await (const text of readTextFile(filePath, 1000)) {
-//   console.log(text);
-// }
-
-// for await (const text of readPDFfile(pdfFilePath, 1000)) {
-//   console.log(text);
-// }
-
-// rl.close();
-
-await generateEmbeddings(filePath, 1000, "text");
-// main();
+main();

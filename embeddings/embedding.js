@@ -1,9 +1,9 @@
-import { geminiChat } from "../providers/geminiChat.js";
+import { embededContent } from "../content/embedContent.js";
 import { readPDFfile } from "../reader/pdfReader.js";
 import { readTextFile } from "../reader/textReader.js";
 import { addVectorEmbedding } from "../vector/vectorStore.js";
 
-export const generateEmbeddings = async (
+export const generateEmbedding = async (
   filePath = "",
   TOKEN_SIZE = null,
   fileType = "",
@@ -20,23 +20,20 @@ export const generateEmbeddings = async (
       throw new Error("Please provide correct file type.(eg. text,pdf)");
     }
     for await (const content of action(filePath, TOKEN_SIZE)) {
-      const response = await geminiChat(
-        "gemini-embedding-001", // model
+      const response = await embededContent(
         content, // contect or text that proceed to convert into enbeddings
-        {}, // config
-        "embedding", // chat type
       );
       const obj = {
         id: null,
         text: content,
-        embeddings: response.embeddings[0].values,
+        embedding: response.embeddings[0].values,
       };
       console.log(obj);
       addVectorEmbedding(obj);
     }
     return;
   } catch (error) {
-    console.error("Error in generating embeddings.", error);
+    console.error("Error in generating embedding.", error);
   }
 };
 

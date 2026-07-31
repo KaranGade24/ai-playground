@@ -1,4 +1,4 @@
-import { normalChat } from "../chats/normalChat.js";
+import { generateContent } from "../content/generateContent.js";
 import { CLI_input } from "../utils/CLI_input.js";
 
 export const startChat = async (rl) => {
@@ -12,7 +12,7 @@ export const startChat = async (rl) => {
     // input
     const { value: prompt } = await CLI_input("You: ");
     // response
-    const response = await normalChat(prompt, "gemini-3.5-flash-lite");
+    const response = await generateContent(prompt);
     console.log("AI: ", response);
     console.log("__________________________________\n\n");
   } catch (error) {
