@@ -5,7 +5,7 @@ export const addUserMessage = (prompt) => {
     if (prompt !== "") {
       history.push({
         role: "user",
-        parts: [{ text: prompt }],
+        parts: [{ text: JSON.stringify(prompt) }],
       });
     }
   } catch (error) {

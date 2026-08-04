@@ -5,12 +5,15 @@ import {
   history,
   removeOldHistory,
 } from "../memory/history.js";
+import { toolQueryFormater } from "../tools/toolQueryFormater.js";
 
 export const generateContent = async (prompt) => {
   try {
+    let query = toolQueryFormater(prompt);
     removeOldHistory();
-    // passing prompt to history Storage
-    addUserMessage(prompt);
+    // passing query to history Storage
+    addUserMessage(query);
+    console.log(history);
 
     // generating response from AIModel
     const response = await AI.models.generateContent({
