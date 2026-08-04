@@ -1,7 +1,7 @@
 import { generateEmbedding } from "../embeddings/embedding.js";
-import { startChat } from "../services/chat.js";
-import { emailWriter } from "../services/email.js";
-import { embededChat } from "../services/embededChat.js";
+import { startChat } from "../services/chat.service.js";
+import { emailWriter } from "../services/email.service.js";
+import { embededChat } from "../services/embededChat.service.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
